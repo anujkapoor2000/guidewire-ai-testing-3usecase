@@ -10,6 +10,9 @@ cd "$CLAUDE_PROJECT_DIR"
 echo "Installing npm dependencies..."
 npm install
 
+echo "Clearing Next.js build cache..."
+rm -rf .next
+
 echo "Running build check..."
 npm run build
 
