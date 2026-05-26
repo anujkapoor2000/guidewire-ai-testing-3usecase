@@ -18,15 +18,15 @@ const CENTERS = ["PolicyCenter", "ClaimCenter", "BillingCenter"];
 const FORMATS_DATA = ["JSON", "Table", "CSV-ready"];
 
 export default function TestDataGenerator() {
-  const [center, setCenter]     = useState("PolicyCenter");
-  const [product, setProduct]   = useState("Personal Auto");
-  const [count, setCount]       = useState(3);
-  const [format, setFormat]     = useState("JSON");
-  const [notes, setNotes]       = useState("");
-  const [result, setResult]     = useState("");
-  const [loading, setLoading]   = useState(false);
-  const [copied, setCopied]     = useState(false);
-  const [error, setError]       = useState("");
+  const [center, setCenter] = useState("PolicyCenter");
+  const [product, setProduct] = useState("Personal Auto");
+  const [count, setCount] = useState(3);
+  const [format, setFormat] = useState("JSON");
+  const [notes, setNotes] = useState("");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState("");
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -58,12 +58,12 @@ export default function TestDataGenerator() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20">
-          <Database size={22} className="text-emerald-400" />
+        <div className="bg-emerald-50 p-2.5 rounded-xl border border-emerald-100">
+          <Database size={22} className="text-emerald-600" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white">Test Data Generator</h2>
-          <p className="text-gray-400 text-sm">Generate realistic insurance test data for Guidewire modules</p>
+          <h2 className="text-xl font-bold text-gray-900">Test Data Generator</h2>
+          <p className="text-gray-500 text-sm">Generate realistic insurance test data for Guidewire modules</p>
         </div>
       </div>
 
@@ -78,10 +78,10 @@ export default function TestDataGenerator() {
                 key={c}
                 onClick={() => setCenter(c)}
                 className={clsx(
-                  "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
+                  "pill-btn",
                   center === c
-                    ? "bg-emerald-700 border-emerald-600 text-white"
-                    : "bg-gray-800 border-gray-700 text-gray-400 hover:text-white"
+                    ? "bg-emerald-600 border-emerald-500 text-white"
+                    : "pill-btn-inactive"
                 )}
               >
                 {c}
@@ -99,10 +99,10 @@ export default function TestDataGenerator() {
                 key={p}
                 onClick={() => setProduct(p)}
                 className={clsx(
-                  "px-3 py-1.5 rounded-lg text-sm font-medium border transition-all",
+                  "pill-btn",
                   product === p
-                    ? "bg-emerald-700 border-emerald-600 text-white"
-                    : "bg-gray-800 border-gray-700 text-gray-400 hover:text-white"
+                    ? "bg-emerald-600 border-emerald-500 text-white"
+                    : "pill-btn-inactive"
                 )}
               >
                 {p}
@@ -112,7 +112,7 @@ export default function TestDataGenerator() {
         </div>
 
         {/* Count & Format */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label className="label">Number of Records</label>
             <input
@@ -132,10 +132,10 @@ export default function TestDataGenerator() {
                   key={f}
                   onClick={() => setFormat(f)}
                   className={clsx(
-                    "px-3 py-1.5 rounded-lg text-sm font-medium border transition-all",
+                    "pill-btn",
                     format === f
-                      ? "bg-emerald-700 border-emerald-600 text-white"
-                      : "bg-gray-800 border-gray-700 text-gray-400 hover:text-white"
+                      ? "bg-emerald-600 border-emerald-500 text-white"
+                      : "pill-btn-inactive"
                   )}
                 >
                   {f}
@@ -147,7 +147,9 @@ export default function TestDataGenerator() {
 
         {/* Notes */}
         <div>
-          <label className="label">Special Requirements <span className="text-gray-500">(optional)</span></label>
+          <label className="label">
+            Special Requirements <span className="text-gray-400 font-normal">(optional)</span>
+          </label>
           <textarea
             className="input-field resize-none"
             rows={2}
@@ -158,7 +160,11 @@ export default function TestDataGenerator() {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={handleGenerate} disabled={loading} className="btn-primary">
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            className="btn-primary bg-emerald-600 hover:bg-emerald-700"
+          >
             {loading ? <Loader2 size={16} className="animate-spin" /> : <Database size={16} />}
             {loading ? "Generating..." : "Generate Test Data"}
           </button>
@@ -173,7 +179,7 @@ export default function TestDataGenerator() {
 
       {/* Error */}
       {error && (
-        <div className="bg-red-950/50 border border-red-800 rounded-xl p-4 text-red-300 text-sm">
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
           ⚠️ {error}
         </div>
       )}
@@ -182,18 +188,18 @@ export default function TestDataGenerator() {
       {result && (
         <div className="card space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-white">
+            <h3 className="font-semibold text-gray-900">
               Generated Test Data
-              <span className="ml-2 badge bg-emerald-900/50 text-emerald-400 border border-emerald-800">
+              <span className="ml-2 badge bg-emerald-50 text-emerald-700 border border-emerald-100">
                 {count} record{count > 1 ? "s" : ""}
               </span>
             </h3>
             <button onClick={handleCopy} className="btn-secondary text-sm">
-              {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+              {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
               {copied ? "Copied!" : "Copy"}
             </button>
           </div>
-          <pre className="bg-gray-950 rounded-xl p-4 text-sm text-gray-300 overflow-auto whitespace-pre-wrap leading-relaxed border border-gray-800">
+          <pre className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 overflow-auto whitespace-pre-wrap leading-relaxed border border-gray-200">
             {result}
           </pre>
         </div>
